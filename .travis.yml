@@ -3,9 +3,8 @@ language: node_js
 node_js:
   - "15.1.0"
 
-env:
-  global:
-    secure:  "long secure base64 string"
+before_install:
+  - export TZ=Asia/Taipei
 
 install:
   - npm install
@@ -15,11 +14,11 @@ script:
   - git config --global user.name "$GIT_NAME"
   - git config --global user.email "$GIT_EMAIL"
   - git config --global push.default simple
-  - git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/ssk7833/blog public
+  - git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Neko-Tsuki/blogs
   # Generate Hexo static pages
   - npm run generate
   - cd public
   - git add -A .
   - MESSAGE=`date +\ %Y-%m-%d\ %H:%M:%S`
   - git commit -m "Site updated:$MESSAGE"
-  - git push --quietr
+  - git push --quiet
